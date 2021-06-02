@@ -1,39 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Menu.css"
 
 const Menu = () => {
     const [activeFlag, setActiveFlag] = useState({
-        one: false,
+        one: true,
         two: false,
         three: false,
         four: false,
         five: false
     })
+    const [menuBorderLefVal, setMenuBorderLefVal] = useState(0)
+    const menuRef = useRef();
+    const menuItemRef = useRef();
+    const menuBorderRef = useRef();
     const menuClickHandler = (event) => {
-        console.log(event)
         const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
-        const body = document.body;
-        const menu = body.querySelector(".menu");
-        const menuItems = menu.querySelectorAll(".menu__item");
-        const menuBorder = menu.querySelector(".menu__border");
-        let activeItem = menu.querySelector(".active");
-        menu.style.removeProperty("--timeOut");
         let item = event.target.element;
         let id = event.target.id;
-        console.log(id)
         setActiveFlag(prevState => {
-            let val = {
+            let updatedFlagVals = {
                 one: false,
                 two: false,
                 three: false,
                 four: false,
                 five: false
             }
-            val[id] = true
-            return val;
+            updatedFlagVals[id] = true
+            return updatedFlagVals;
         })
-        console.log(activeFlag)
 
+        const offsetActiveItem = menuItemRef.current.getBoundingClientRect();
+        const offsetMenuBar = menuRef.current.getBoundingClientRect();
+        const offsetMenuBorder = menuBorderRef.current.getBoundingClientRect();
+        console.log(offsetActiveItem)
+        console.log(offsetMenuBar)
+        console.log(offsetMenuBorder)
+        console.log(event.target.offsetLeft)
+        const left = Math.ceil(event.target.offsetLeft - Math.ceil(offsetMenuBar.left) - (Math.ceil(offsetMenuBorder.width) - event.target.offsetWidth) / 2);
+        console.log(left);
+        setMenuBorderLefVal(left);
+        
         // if (activeItem == item) return;
 
         // if (activeItem) {
@@ -48,10 +54,11 @@ const Menu = () => {
     }
     return (
         <React.Fragment>
-            <menu id="menu_bar" className="menu">
+            <menu id="menu_bar" ref={menuRef} className="menu">
 
                 <button
                     id="one"
+                    ref={menuItemRef}
                     className={activeFlag.one ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#ff8c00" }}
                     onClick={(e) => menuClickHandler(e)}>
@@ -64,6 +71,7 @@ const Menu = () => {
 
                 <button
                     id="two"
+                    ref={menuItemRef}
                     className={activeFlag.two ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#f54888" }}
                     onClick={(e) => menuClickHandler(e)}>
@@ -76,6 +84,7 @@ const Menu = () => {
 
                 <button
                     id="three"
+                    ref={menuItemRef}
                     className={activeFlag.three ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#4343f5" }}
                     onClick={(e) => menuClickHandler(e)}>
@@ -88,6 +97,7 @@ const Menu = () => {
 
                 <button
                     id="four"
+                    ref={menuItemRef}
                     className={activeFlag.four ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#e0b115" }}
                     onClick={(e) => menuClickHandler(e)}>
@@ -112,7 +122,7 @@ const Menu = () => {
                     </svg>
                 </button>
 
-                <div className="menu__border"></div>
+                <div ref={menuBorderRef} className="menu__border" style={{ "transform": `translate3d(${menuBorderLefVal}px, 0px, 0px)` }}></div>
 
             </menu>
 
