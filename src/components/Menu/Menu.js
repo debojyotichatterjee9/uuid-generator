@@ -29,28 +29,13 @@ const Menu = () => {
             return updatedFlagVals;
         })
 
-        const offsetActiveItem = menuItemRef.current.getBoundingClientRect();
-        const offsetMenuBar = menuRef.current.getBoundingClientRect();
-        const offsetMenuBorder = menuBorderRef.current.getBoundingClientRect();
-        console.log(offsetActiveItem)
-        console.log(offsetMenuBar)
-        console.log(offsetMenuBorder)
-        console.log(event.target.offsetLeft)
-        const left = Math.ceil(event.target.offsetLeft - Math.ceil(offsetMenuBar.left) - (Math.ceil(offsetMenuBorder.width) - event.target.offsetWidth) / 2);
-        console.log(left);
-        setMenuBorderLefVal(left);
-        
-        // if (activeItem == item) return;
-
-        // if (activeItem) {
-        //     activeItem.classList.remove("active");
-        // }
-
-
-        // item.classList.add("active");
-        // body.style.backgroundColor = bgColorsBody[2];
-        // activeItem = item;
-        // offsetMenuBorder(activeItem, menuBorder);
+        // const offsetActiveItem = menuItemRef.current.getBoundingClientRect();
+        // const offsetMenuBar = menuRef.current.getBoundingClientRect();
+        // const offsetMenuBorder = menuBorderRef.current.getBoundingClientRect();
+        // console.log(offsetMenuBar)
+        // console.log(menuRef.clientLeft)
+        // const left = Math.ceil(event.target.offsetLeft - menuRef.current.clientLeft - (Math.ceil(offsetMenuBorder.width) - event.target.offsetWidth) / 2);
+        // setMenuBorderLefVal(left);
     }
     return (
         <React.Fragment>
@@ -122,7 +107,7 @@ const Menu = () => {
                     </svg>
                 </button>
 
-                <div ref={menuBorderRef} className="menu__border" style={{ "transform": `translate3d(${menuBorderLefVal}px, 0px, 0px)` }}></div>
+                {/* <div ref={menuBorderRef} className="menu__border" style={{ "transform": `translate3d(${menuBorderLefVal}px, 0px, 0px)` }}></div> */}
 
             </menu>
 
