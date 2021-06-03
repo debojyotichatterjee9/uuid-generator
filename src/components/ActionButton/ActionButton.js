@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import classes from "./ActionButton.module.css"
+// import classes from "./ActionButton.module.css"
 
 const ActionButton = props => {
     const [classValues, setClassValues] = useState(props.bsClasses);
@@ -28,7 +28,7 @@ const ActionButton = props => {
         return () => {
             clearTimeout(timer)
         }
-    }, [classValues]);
+    }, [classValues, props.bsClasses, props.name]);
     return(
         <React.Fragment>
         <button 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import classes from './App.module.css';
 
 import Menu from './components/Menu/Menu';

@@ -9,13 +9,13 @@ const Menu = props => {
         five: false,
         empty: false
     })
-    const [menuBorderLefVal, setMenuBorderLefVal] = useState(254)
+    // const [menuBorderLefVal, setMenuBorderLefVal] = useState(254)
     const menuRef = useRef();
     const menuItemRef = useRef();
-    const menuBorderRef = useRef();
+    // const menuBorderRef = useRef();
     const menuClickHandler = (event) => {
         const bgColorsBody = { one: "#ffb457", three: "#ff96bd", four: "#9999fb", five: "#be9c91", empty: "#cffff1" };
-        let item = event.target.element;
+        // let item = event.target.element;
         let id = event.target.id;
         setActiveFlag(prevState => {
             let updatedFlagVals = {
