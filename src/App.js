@@ -83,7 +83,7 @@ function App() {
     <div className={`${classes.App} container ${classes.container}`}>
       <header className={classes["App-header"]}>
         {/* <img src={logo} className={classes["App-logo"]} alt="logo" /> */}
-        <h1><span class="badge bg-secondary">UUID Generator</span></h1>
+        <h1><span className="badge bg-secondary">UUID Generator</span></h1>
       </header>
       <Menu
         onUuidTypeChange={uuidTypeChangeHandler} />
