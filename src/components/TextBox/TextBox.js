@@ -1,11 +1,13 @@
 import React from "react";
 import classes from "./TextBox.module.css"
 
-const TextBox = () => {
+const TextBox = props => {
     return(
-        <React.Fragment>
-            <input />
-        </React.Fragment>
+        <div className="mt-4">
+            <input 
+            className={`${classes.textbox} form-control`}
+            value={props.val}/>
+        </div>
     );
 }
 

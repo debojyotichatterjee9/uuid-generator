@@ -4,7 +4,9 @@ import classes from "./ActionButton.module.css"
 const ActionButton = props => {
     return(
         <React.Fragment>
-        <button onClick={props.onRegenrate}>{props.name ? props.name : "New Button"}</button>
+        <button 
+        className={props.bsClasses}
+        onClick={props.onRegenrate}>{props.name ? props.name : "New Button"}</button>
         </React.Fragment>
     );
 }
