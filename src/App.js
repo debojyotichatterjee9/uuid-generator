@@ -78,7 +78,7 @@ function App() {
     if (!nameSpaceError) {
       uuidGenerateHandler(inputType)
     }
-  }, [name, nameSpace]);
+  }, [name, nameSpace, nameSpaceError, inputType]);
   return (
     <div className={`${classes.App} container ${classes.container}`}>
       <header className={classes["App-header"]}>
