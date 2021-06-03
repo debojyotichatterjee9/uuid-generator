@@ -13,7 +13,7 @@ function App() {
   const [inputState, setInputState] = useState(v4());
   const [inputType, setInputType] = useState("four");
   const [name, setname] = useState("Change Me!");
-  const [nameSpace, setnameSpace] = useState(v4());
+  const [nameSpace, setnameSpace] = useState(v4());  
 
   const uuidTypeChangeHandler = type => {
     setInputType(type)
@@ -75,20 +75,25 @@ function App() {
         <div className="d-flex justify-content-evenly">
           <TextBox
             val={name}
+            label="Name"
             readonly={false}
             onChange={nameChangeHandler} />
           <TextBox
             val={nameSpace}
+            label="Namespace"
             readonly={false}
             onChange={nameSpaceChangeHandler} />
         </div>
         :
         null
       }
-      <TextBox val={inputState} readonly={"readonly"} />
+      <TextBox 
+      val={inputState} 
+      // label="UUID"
+      readonly={"readonly"} />
       <div className="d-flex justify-content-evenly mt-4">
         <ActionButton
-          name="Regnerate"
+          name="Regenerate"
           bsClasses="btn-lg btn btn-dark"
           onClick={uuidGenerateHandler} />
         <ActionButton

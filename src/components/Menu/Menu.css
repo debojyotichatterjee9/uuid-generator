@@ -1,7 +1,7 @@
 html {
 
     box-sizing: border-box;
-    --bgColorMenu : #1d1d27;
+    --bgColorMenu : #212529;
     --duration: .7s;    
 
 }
@@ -139,6 +139,8 @@ body{
 button > * {
   pointer-events: none;
 }
+
+
 
 
 @media screen and (max-width: 50em) {

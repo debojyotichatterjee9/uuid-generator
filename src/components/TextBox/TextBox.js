@@ -9,6 +9,7 @@ const TextBox = props => {
     }
     return(
         <div className="mt-4">
+            {props.label && <label>{props.label}</label>}
             <input 
             type="text"
             className={`${classes.textbox} form-control`}
