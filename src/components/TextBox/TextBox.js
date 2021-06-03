@@ -4,7 +4,6 @@ import classes from "./TextBox.module.css"
 const TextBox = props => {
     
     const inputChangeHandler = event => {
-        console.log(event.target.value)
         props.onChange(event.target.value)
     }
     return(
@@ -16,6 +15,7 @@ const TextBox = props => {
             value={props.val}
             readOnly={props.readonly}
             onChange={inputChangeHandler}/>
+            {props.errorFlag && <p className={classes.error}>Please enter a correct value!</p>}
         </div>
     );
 }

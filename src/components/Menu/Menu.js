@@ -14,7 +14,7 @@ const Menu = props => {
     const menuItemRef = useRef();
     const menuBorderRef = useRef();
     const menuClickHandler = (event) => {
-        const bgColorsBody = { one: "#ffb457", two: "#ff96bd", three: "#9999fb", four: "#ffe797", five: "#cffff1" };
+        const bgColorsBody = { one: "#ffb457", three: "#ff96bd", four: "#9999fb", five: "#be9c91", empty: "#cffff1" };
         let item = event.target.element;
         let id = event.target.id;
         setActiveFlag(prevState => {
@@ -100,7 +100,7 @@ const Menu = props => {
                     id="five"
                     ref={menuItemRef}
                     className={activeFlag.five ? "menu__item active" : "menu__item"}
-                    style={{ "--bgColorItem": "#e0b115" }}
+                    style={{ "--bgColorItem": "#5f4339" }}
                     onClick={(e) => menuClickHandler(e)}>
                     {/* <svg className="icon" viewBox="0 0 24 24">
                         <path d="M5.1,3.9h13.9c0.6,0,1.2,0.5,1.2,1.2v13.9c0,0.6-0.5,1.2-1.2,1.2H5.1c-0.6,0-1.2-0.5-1.2-1.2V5.1

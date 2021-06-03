@@ -6,20 +6,19 @@ import Menu from './components/Menu/Menu';
 import TextBox from './components/TextBox/TextBox';
 import ActionButton from './components/ActionButton/ActionButton';
 
-import { v1, v3, v4, v5, NIL } from "uuid";
+import { v1, v3, v4, v5, NIL, validate } from "uuid";
 import copy from "copy-to-clipboard";
 
 function App() {
   const [inputState, setInputState] = useState(v4());
   const [inputType, setInputType] = useState("four");
   const [name, setname] = useState("Change Me!");
-  const [nameSpace, setnameSpace] = useState(v4());  
+  const [nameSpace, setnameSpace] = useState(v4());
+  const [nameSpaceError, setNameSpaceError] = useState(false)
 
   const uuidTypeChangeHandler = type => {
     setInputType(type)
     uuidGenerateHandler(type)
-    console.log(type)
-
   }
   const uuidGenerateHandler = (type = inputType) => {
     switch (type) {
@@ -30,17 +29,28 @@ function App() {
           msecs: new Date().getTime(),
           nsecs: Math.floor(1000 + Math.random() * 9000),
         };
-        console.log(v1options)
         setInputState(v1(v1options));
         break;
       case "three":
-        setInputState(v3(name, nameSpace));
+        if (nameSpaceError) {
+          setnameSpace(v4());
+          setNameSpaceError(false);
+        }
+        if (!nameSpaceError) {
+          setInputState(v3(name, nameSpace));
+        }
         break;
       case "four":
         setInputState(v4());
         break;
       case "five":
-        setInputState(v5(name, nameSpace));
+        if (nameSpaceError) {
+          setnameSpace(v4());
+          setNameSpaceError(false);
+        }
+        if (!nameSpaceError) {
+          setInputState(v5(name, nameSpace));
+        }
         break;
       default:
         setInputState(NIL);
@@ -51,23 +61,30 @@ function App() {
     setname(newValue);
   }
   const nameSpaceChangeHandler = (newValue) => {
-    setnameSpace(newValue);
+    if (validate(newValue)) {
+      setNameSpaceError(false)
+      setnameSpace(newValue);
+    }
+    else {
+      setnameSpace(newValue);
+      setNameSpaceError(true)
+    }
   }
   const copyUuidHandler = () => {
     copy(inputState);
   }
 
   useEffect(() => {
-    uuidGenerateHandler(inputType)
-  }, [name, nameSpace])
+    if (!nameSpaceError) {
+      uuidGenerateHandler(inputType)
+    }
+  }, [name, nameSpace]);
   return (
     <div className={`${classes.App} container ${classes.container}`}>
-      {/* <header className={classes["App-header"]}>
-        <img src={logo} className={classes["App-logo"]} alt="logo" />
-        <p>
-          <code>Built with React</code>
-        </p>
-      </header> */}
+      <header className={classes["App-header"]}>
+        {/* <img src={logo} className={classes["App-logo"]} alt="logo" /> */}
+        <h1><span class="badge bg-secondary">UUID Generator</span></h1>
+      </header>
       <Menu
         onUuidTypeChange={uuidTypeChangeHandler} />
       {inputType === "three" || inputType === "five"
@@ -76,21 +93,24 @@ function App() {
           <TextBox
             val={name}
             label="Name"
+            errorFlag={false}
             readonly={false}
             onChange={nameChangeHandler} />
           <TextBox
             val={nameSpace}
             label="Namespace"
+            errorFlag={nameSpaceError}
             readonly={false}
             onChange={nameSpaceChangeHandler} />
         </div>
         :
         null
       }
-      <TextBox 
-      val={inputState} 
-      // label="UUID"
-      readonly={"readonly"} />
+      <TextBox
+        val={inputState}
+        // label="UUID"
+        errorFlag={false}
+        readonly={"readonly"} />
       <div className="d-flex justify-content-evenly mt-4">
         <ActionButton
           name="Regenerate"
@@ -98,8 +118,8 @@ function App() {
           onClick={uuidGenerateHandler} />
         <ActionButton
           name="Copy"
-          bsClasses="btn-lg btn-dark" 
-          onClick={copyUuidHandler}/>
+          bsClasses="btn-lg btn-dark"
+          onClick={copyUuidHandler} />
       </div>
     </div>
   );
