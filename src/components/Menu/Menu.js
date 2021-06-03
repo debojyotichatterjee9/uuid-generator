@@ -1,15 +1,15 @@
 import React, { useState, useRef } from "react";
 import "./Menu.css"
 
-const Menu = () => {
+const Menu = props => {
     const [activeFlag, setActiveFlag] = useState({
         one: false,
-        two: false,
-        three: true,
-        four: false,
-        five: false
+        three: false,
+        four: true,
+        five: false,
+        empty: false
     })
-    const [menuBorderLefVal, setMenuBorderLefVal] = useState(0)
+    const [menuBorderLefVal, setMenuBorderLefVal] = useState(254)
     const menuRef = useRef();
     const menuItemRef = useRef();
     const menuBorderRef = useRef();
@@ -20,10 +20,10 @@ const Menu = () => {
         setActiveFlag(prevState => {
             let updatedFlagVals = {
                 one: false,
-                two: false,
                 three: false,
                 four: false,
-                five: false
+                five: false,
+                empty: false
             }
             updatedFlagVals[id] = true
             return updatedFlagVals;
@@ -33,10 +33,11 @@ const Menu = () => {
         // const offsetActiveItem = menuItemRef.current.getBoundingClientRect();
         // const offsetMenuBar = menuRef.current.getBoundingClientRect();
         // const offsetMenuBorder = menuBorderRef.current.getBoundingClientRect();
-        // console.log(offsetMenuBar)
-        // console.log(menuRef.clientLeft)
         // const left = Math.ceil(event.target.offsetLeft - menuRef.current.clientLeft - (Math.ceil(offsetMenuBorder.width) - event.target.offsetWidth) / 2);
         // setMenuBorderLefVal(left);
+
+
+        props.onUuidTypeChange(id);
     }
     return (
         <React.Fragment>
@@ -56,9 +57,9 @@ const Menu = () => {
                 </button>
 
                 <button
-                    id="two"
+                    id="three"
                     ref={menuItemRef}
-                    className={activeFlag.two ? "menu__item active" : "menu__item"}
+                    className={activeFlag.three ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#f54888" }}
                     onClick={(e) => menuClickHandler(e)}>
                     {/* <svg className="icon" viewBox="0 0 24 24">
@@ -74,9 +75,9 @@ const Menu = () => {
                 </button>
 
                 <button
-                    id="three"
+                    id="four"
                     ref={menuItemRef}
-                    className={activeFlag.three ? "menu__item active" : "menu__item"}
+                    className={activeFlag.four ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#4343f5" }}
                     onClick={(e) => menuClickHandler(e)}>
                     <svg className="icon" viewBox="0 0 24 24">
@@ -87,9 +88,9 @@ const Menu = () => {
                 </button>
 
                 <button
-                    id="four"
+                    id="five"
                     ref={menuItemRef}
-                    className={activeFlag.four ? "menu__item active" : "menu__item"}
+                    className={activeFlag.five ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#e0b115" }}
                     onClick={(e) => menuClickHandler(e)}>
                     {/* <svg className="icon" viewBox="0 0 24 24">
@@ -106,8 +107,8 @@ const Menu = () => {
                 </button>
 
                 <button
-                    id="five"
-                    className={activeFlag.five ? "menu__item active" : "menu__item"}
+                    id="empty"
+                    className={activeFlag.empty ? "menu__item active" : "menu__item"}
                     style={{ "--bgColorItem": "#65ddb7" }}
                     onClick={(e) => menuClickHandler(e)}>
                     {/* <svg className="icon" viewBox="0 0 24 24" >
